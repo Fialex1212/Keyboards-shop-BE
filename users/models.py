@@ -47,8 +47,7 @@ class User(AbstractUser):
     )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name", "last_name", "telegram"]
-
+    REQUIRED_FIELDS = ["first_name", "last_name"]
     objects = CustomUserManager()
 
     def save(self, *args, **kwargs):

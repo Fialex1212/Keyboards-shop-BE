@@ -71,15 +71,15 @@ if ENVIRONMENT == "dev":
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / os.getenv("DB_NAME", "db.sqlite3"),
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
 else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("DB_NAME", "courses_db"),
-            "USER": os.getenv("DB_USER", "courses_user"),
+            "NAME": os.getenv("DB_NAME", "keyboards_db"),
+            "USER": os.getenv("DB_USER", "keyboards_user"),
             "PASSWORD": os.getenv("DB_PASSWORD", "secure_password"),
             "HOST": os.getenv("DB_HOST", "localhost"),
             "PORT": os.getenv("DB_PORT", "5432"),

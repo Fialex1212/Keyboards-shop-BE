@@ -10,8 +10,11 @@ class Product(models.Model):
         OTHER = "other"
 
     title = models.CharField(max_length=255, verbose_name="Product title")
+    image = models.ImageField(upload_to="products/images/", null=True, blank=True)
     description = models.TextField(blank=True, null=True, verbose_name="Description")
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Price")
+    price = models.DecimalField(
+        max_digits=10, decimal_places=2, verbose_name="Price", default=0
+    )
     type = models.CharField(
         max_length=50,
         choices=TypeChoice.choices,
@@ -24,6 +27,7 @@ class Product(models.Model):
         blank=True,
         null=True,
         verbose_name="Discounted price",
+        default=0,
     )
     quantity = models.PositiveIntegerField(default=0, verbose_name="Quantity")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -56,3 +60,14 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.product.title}"
+
+
+class ProductAttribute(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="attributes",
+        verbose_name="Product",
+    )
+    title = models.CharField(max_length=255, verbose_name="Product attribute title")
+    text = models.TextField(blank=True, null=True, verbose_name="Text")
